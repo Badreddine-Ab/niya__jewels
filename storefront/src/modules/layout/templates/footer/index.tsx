@@ -5,10 +5,8 @@ import { Text, clx } from "@medusajs/ui"
 import LocalizedClientLink from "@modules/common/components/localized-client-link"
 
 export default async function Footer() {
-  const { collections } = await listCollections({
-    fields: "*products",
-  })
-  const productCategories = await listCategories()
+  const { collections } = await listCollections({ fields: "*products" }).catch(() => ({ collections: [], count: 0 }))
+  const productCategories = await listCategories().catch(() => [])
 
   return (
     <footer className="border-t border-gold-200 w-full bg-charcoal-800 text-cream-200">

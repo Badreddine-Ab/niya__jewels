@@ -22,20 +22,18 @@ export default async function Home(props: {
 
   const { collections } = await listCollections({
     fields: "id, handle, title",
-  })
-
-  if (!collections || !region) {
-    return null
-  }
+  }).catch(() => ({ collections: [], count: 0 }))
 
   return (
     <>
       <Hero />
-      <div className="bg-cream-100">
-        <ul className="flex flex-col">
-          <FeaturedProducts collections={collections} region={region} />
-        </ul>
-      </div>
+      {collections.length > 0 && region && (
+        <div className="bg-cream-100">
+          <ul className="flex flex-col">
+            <FeaturedProducts collections={collections} region={region} />
+          </ul>
+        </div>
+      )}
 
       {/* About section */}
       <section className="bg-charcoal-800 py-20 px-6">
