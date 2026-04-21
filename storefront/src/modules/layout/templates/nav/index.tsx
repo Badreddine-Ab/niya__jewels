@@ -16,53 +16,50 @@ export default async function Nav() {
   ])
 
   return (
-    <div className="sticky top-0 inset-x-0 z-50 group">
+    <div className="sticky top-0 inset-x-0 z-50">
       {/* Announcement bar */}
-      <div className="bg-charcoal-800 text-cream-100 text-center py-2 px-4">
-        <p className="text-[10px] tracking-[0.3em] uppercase font-light">
-          ✦ Livraison offerte dès 5000 DA — Code : NIYA10 pour -10% ✦
+      <div className="bg-charcoal-800 text-cream-100 text-center py-2.5 px-4">
+        <p className="text-[9px] tracking-[0.4em] uppercase font-light">
+          ✦ &nbsp;Livraison offerte dès 5000 DA &nbsp;·&nbsp; Code{" "}
+          <span className="text-gold-400">NIYA10</span> pour -10% sur votre première commande&nbsp; ✦
         </p>
       </div>
 
       {/* Main navigation */}
-      <header className="relative h-16 mx-auto border-b border-gold-200 duration-200 bg-cream-100">
-        <nav className="content-container text-ui-fg-subtle flex items-center justify-between w-full h-full">
+      <header className="relative h-16 mx-auto border-b border-gold-200 bg-cream-50 backdrop-blur-sm">
+        <nav className="content-container flex items-center justify-between w-full h-full">
           {/* Left — burger menu */}
           <div className="flex-1 basis-0 h-full flex items-center">
-            <div className="h-full">
-              <SideMenu regions={regions} locales={locales} currentLocale={currentLocale} />
-            </div>
+            <SideMenu regions={regions} locales={locales} currentLocale={currentLocale} />
           </div>
 
           {/* Center — Logo */}
           <div className="flex items-center h-full">
             <LocalizedClientLink
               href="/"
-              className="group opacity-90 hover:opacity-100 transition-opacity duration-300"
+              className="flex items-center opacity-90 hover:opacity-100 transition-opacity duration-300"
               data-testid="nav-store-link"
             >
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img
                 src="/niya-logo.svg"
                 alt="NIYA Jewels"
-                width={160}
-                height={46}
-                className="h-10 w-auto"
+                className="h-11 w-auto"
               />
             </LocalizedClientLink>
           </div>
 
           {/* Right — Links + Cart */}
           <div className="flex items-center gap-x-6 h-full flex-1 basis-0 justify-end">
-            <div className="hidden small:flex items-center gap-x-6 h-full text-xs tracking-wider font-light">
+            <div className="hidden small:flex items-center gap-x-7 h-full">
               <LocalizedClientLink
-                className="text-charcoal-600 hover:text-gold-500 transition-colors duration-200 uppercase tracking-wider"
+                className="text-charcoal-600 hover:text-gold-500 transition-colors duration-200 text-[10px] tracking-[0.25em] uppercase font-light gold-underline"
                 href="/store"
               >
                 Boutique
               </LocalizedClientLink>
               <LocalizedClientLink
-                className="text-charcoal-600 hover:text-gold-500 transition-colors duration-200 uppercase tracking-wider"
+                className="text-charcoal-600 hover:text-gold-500 transition-colors duration-200 text-[10px] tracking-[0.25em] uppercase font-light gold-underline"
                 href="/account"
                 data-testid="nav-account-link"
               >
@@ -72,7 +69,7 @@ export default async function Nav() {
             <Suspense
               fallback={
                 <LocalizedClientLink
-                  className="text-charcoal-600 hover:text-gold-500 transition-colors duration-200 flex gap-2 text-xs uppercase tracking-wider"
+                  className="text-charcoal-600 hover:text-gold-500 transition-colors duration-200 flex gap-2 text-[10px] tracking-[0.25em] uppercase font-light"
                   href="/cart"
                   data-testid="nav-cart-link"
                 >

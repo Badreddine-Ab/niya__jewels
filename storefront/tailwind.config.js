@@ -187,6 +187,18 @@ module.exports = {
           "0%": { backgroundPosition: "-200% 0" },
           "100%": { backgroundPosition: "200% 0" },
         },
+        marquee: {
+          "0%": { transform: "translateX(0)" },
+          "100%": { transform: "translateX(-50%)" },
+        },
+        "fade-up": {
+          "0%": { opacity: "0", transform: "translateY(24px)" },
+          "100%": { opacity: "1", transform: "translateY(0)" },
+        },
+        "gold-pulse": {
+          "0%, 100%": { opacity: "0.6" },
+          "50%": { opacity: "1" },
+        },
       },
       animation: {
         ring: "ring 2.2s cubic-bezier(0.5, 0, 0.5, 1) infinite",
@@ -203,6 +215,9 @@ module.exports = {
         "slide-in": "slide-in 1.2s cubic-bezier(.41,.73,.51,1.02)",
         leave: "leave 150ms ease-in forwards",
         shimmer: "shimmer 2s linear infinite",
+        marquee: "marquee 28s linear infinite",
+        "fade-up": "fade-up 0.7s ease forwards",
+        "gold-pulse": "gold-pulse 3s ease-in-out infinite",
       },
     },
   },

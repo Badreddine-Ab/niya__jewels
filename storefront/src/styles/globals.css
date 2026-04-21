@@ -124,6 +124,54 @@ body {
   }
 }
 
+  /* Moroccan geometric texture overlay */
+  .moroccan-texture {
+    background-image:
+      repeating-linear-gradient(45deg, rgba(201,169,110,0.03) 0px, rgba(201,169,110,0.03) 1px, transparent 1px, transparent 50%),
+      repeating-linear-gradient(-45deg, rgba(201,169,110,0.03) 0px, rgba(201,169,110,0.03) 1px, transparent 1px, transparent 50%);
+    background-size: 40px 40px;
+  }
+
+  /* Entrance animation helpers */
+  .reveal {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.8s ease, transform 0.8s ease;
+  }
+  .reveal.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  /* Gold shimmer text */
+  .gold-shimmer {
+    background: linear-gradient(90deg, #C9A96E 0%, #E8D5A3 40%, #C9A96E 60%, #9A7A3C 100%);
+    background-size: 200% auto;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    animation: shimmer 4s linear infinite;
+  }
+
+  /* Product card hover */
+  .jewelry-card {
+    @apply relative overflow-hidden bg-cream-200;
+  }
+  .jewelry-card img {
+    @apply w-full h-full object-cover transition-transform duration-700 ease-out;
+  }
+  .jewelry-card:hover img {
+    transform: scale(1.07);
+  }
+  .jewelry-card-overlay {
+    @apply absolute inset-0 flex items-end justify-center opacity-0 transition-opacity duration-400;
+    background: linear-gradient(to top, rgba(26,26,26,0.6) 0%, transparent 60%);
+  }
+  .jewelry-card:hover .jewelry-card-overlay {
+    @apply opacity-100;
+  }
+}
+
 @layer components {
   .content-container {
     @apply max-w-[1440px] w-full mx-auto px-6;
