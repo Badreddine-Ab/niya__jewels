@@ -38,26 +38,17 @@ export default async function Nav() {
           <div className="flex items-center h-full">
             <LocalizedClientLink
               href="/"
-              className="flex flex-col items-center leading-none group"
+              className="group opacity-90 hover:opacity-100 transition-opacity duration-300"
               data-testid="nav-store-link"
             >
-              <span
-                className="text-charcoal-800 group-hover:text-gold-500 transition-colors duration-300"
-                style={{
-                  fontFamily: "'Cormorant Garamond', serif",
-                  fontSize: "1.6rem",
-                  fontWeight: 300,
-                  letterSpacing: "0.25em",
-                }}
-              >
-                NIYA
-              </span>
-              <span
-                className="text-gold-500 text-[8px] tracking-[0.5em] uppercase -mt-1"
-                style={{ fontFamily: "'Jost', sans-serif" }}
-              >
-                Jewels
-              </span>
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img
+                src="/niya-logo.svg"
+                alt="NIYA Jewels"
+                width={160}
+                height={46}
+                className="h-10 w-auto"
+              />
             </LocalizedClientLink>
           </div>
 

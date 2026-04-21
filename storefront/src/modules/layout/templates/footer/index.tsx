@@ -18,22 +18,14 @@ export default async function Footer() {
           {/* Brand column */}
           <div className="flex flex-col gap-6 max-w-xs">
             <div>
-              <span
-                className="text-cream-100"
-                style={{
-                  fontFamily: "'Cormorant Garamond', serif",
-                  fontSize: "2rem",
-                  fontWeight: 300,
-                  letterSpacing: "0.2em",
-                }}
-              >
-                NIYA
-              </span>
-              <span
-                className="block text-gold-400 text-[9px] tracking-[0.5em] uppercase -mt-1"
-              >
-                Jewels
-              </span>
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img
+                src="/niya-logo.svg"
+                alt="NIYA Jewels"
+                width={160}
+                height={46}
+                className="h-10 w-auto brightness-0 invert opacity-90"
+              />
             </div>
             <div className="w-8 h-px bg-gold-500" />
             <p className="text-cream-400 text-xs leading-relaxed font-light tracking-wide">

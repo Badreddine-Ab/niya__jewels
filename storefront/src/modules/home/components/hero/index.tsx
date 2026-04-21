@@ -39,32 +39,22 @@ const Hero = () => {
         {/* Center content */}
         <div className="relative z-10 text-center px-6 max-w-4xl mx-auto">
           {/* Brand tagline */}
-          <p className="text-gold-500 text-xs tracking-[0.4em] uppercase mb-6 font-light">
+          <p className="text-gold-500 text-xs tracking-[0.4em] uppercase mb-8 font-light">
             ✦ Collection Exclusive ✦
           </p>
 
-          {/* Main title */}
-          <h1
-            className="font-serif text-charcoal-800 mb-4 leading-none"
-            style={{
-              fontFamily: "'Cormorant Garamond', serif",
-              fontSize: "clamp(3.5rem, 10vw, 8rem)",
-              fontWeight: 300,
-              letterSpacing: "0.05em",
-            }}
-          >
-            NIYA
-          </h1>
+          {/* Logo */}
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img
+            src="/niya-logo.svg"
+            alt="NIYA Jewels"
+            className="w-64 md:w-80 mx-auto mb-8"
+          />
 
-          {/* Subtitle */}
+          {/* Decorative divider */}
           <div className="flex items-center justify-center gap-4 mb-6">
             <div className="w-16 h-px bg-gold-400" />
-            <span
-              className="text-gold-500 tracking-[0.4em] text-sm uppercase"
-              style={{ fontFamily: "'Cormorant Garamond', serif", fontStyle: "italic" }}
-            >
-              Jewels
-            </span>
+            <span className="text-gold-500 text-xs tracking-[0.4em] uppercase">Maroc</span>
             <div className="w-16 h-px bg-gold-400" />
           </div>
 

@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 280 80" fill="none">
+  <!-- Diamond ornament -->
+  <polygon points="20,40 32,28 44,40 32,52" fill="none" stroke="#C9A96E" stroke-width="1.2"/>
+  <polygon points="26,40 32,34 38,40 32,46" fill="#C9A96E" opacity="0.6"/>
+
+  <!-- Brand name -->
+  <text x="60" y="46"
+    font-family="'Cormorant Garamond', 'Georgia', serif"
+    font-size="32"
+    font-weight="300"
+    letter-spacing="10"
+    fill="#1A1A1A">NIYA</text>
+
+  <!-- Tagline -->
+  <text x="61" y="62"
+    font-family="'Jost', 'Arial', sans-serif"
+    font-size="8"
+    font-weight="300"
+    letter-spacing="5"
+    fill="#C9A96E">JEWELS</text>
+
+  <!-- Right ornament line -->
+  <line x1="252" y1="28" x2="252" y2="56" stroke="#C9A96E" stroke-width="0.8" opacity="0.6"/>
+</svg>
