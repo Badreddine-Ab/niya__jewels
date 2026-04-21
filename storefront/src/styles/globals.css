@@ -1,0 +1,209 @@
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500&family=Jost:wght@300;400;500;600&display=swap');
+
+@import "tailwindcss/base";
+@import "tailwindcss/components";
+@import "tailwindcss/utilities";
+
+:root {
+  --color-gold: #C9A96E;
+  --color-gold-light: #E8D5A3;
+  --color-gold-dark: #9A7A3C;
+  --color-cream: #FAF7F2;
+  --color-charcoal: #1A1A1A;
+}
+
+html {
+  background-color: var(--color-cream);
+}
+
+body {
+  background-color: var(--color-cream);
+  color: var(--color-charcoal);
+  font-family: 'Jost', sans-serif;
+  font-weight: 300;
+}
+
+@layer utilities {
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+
+  .no-scrollbar::-webkit-scrollbar-track {
+    background-color: transparent;
+  }
+
+  .no-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+
+  input:focus ~ label,
+  input:not(:placeholder-shown) ~ label {
+    @apply -translate-y-2 text-xsmall-regular;
+  }
+
+  input:focus ~ label {
+    @apply left-0;
+  }
+
+  input:-webkit-autofill,
+  input:-webkit-autofill:hover,
+  input:-webkit-autofill:focus,
+  textarea:-webkit-autofill,
+  textarea:-webkit-autofill:hover,
+  textarea:-webkit-autofill:focus,
+  select:-webkit-autofill,
+  select:-webkit-autofill:hover,
+  select:-webkit-autofill:focus {
+    border: 1px solid #C9A96E;
+    -webkit-text-fill-color: #1A1A1A;
+    -webkit-box-shadow: 0 0 0px 1000px #FAF7F2 inset;
+    transition: background-color 5000s ease-in-out 0s;
+  }
+
+  input[type="search"]::-webkit-search-decoration,
+  input[type="search"]::-webkit-search-cancel-button,
+  input[type="search"]::-webkit-search-results-button,
+  input[type="search"]::-webkit-search-results-decoration {
+    -webkit-appearance: none;
+  }
+
+  .font-display {
+    font-family: 'Cormorant Garamond', serif;
+  }
+
+  .text-gold {
+    color: var(--color-gold);
+  }
+
+  .bg-cream {
+    background-color: var(--color-cream);
+  }
+
+  .border-gold {
+    border-color: var(--color-gold);
+  }
+
+  .gold-underline {
+    position: relative;
+  }
+
+  .gold-underline::after {
+    content: '';
+    position: absolute;
+    bottom: -2px;
+    left: 0;
+    width: 0;
+    height: 1px;
+    background-color: var(--color-gold);
+    transition: width 0.3s ease;
+  }
+
+  .gold-underline:hover::after {
+    width: 100%;
+  }
+
+  .luxury-btn {
+    @apply px-8 py-3 border border-charcoal-800 text-charcoal-800 font-sans font-light tracking-widest text-xs uppercase transition-all duration-300;
+  }
+
+  .luxury-btn:hover {
+    @apply bg-charcoal-800 text-cream-100;
+  }
+
+  .luxury-btn-gold {
+    @apply px-8 py-3 border border-gold-500 text-gold-600 font-sans font-light tracking-widest text-xs uppercase transition-all duration-300;
+  }
+
+  .luxury-btn-gold:hover {
+    @apply bg-gold-500 text-cream-100;
+  }
+
+  .section-divider {
+    @apply w-12 h-px bg-gold-400 mx-auto my-6;
+  }
+}
+
+@layer components {
+  .content-container {
+    @apply max-w-[1440px] w-full mx-auto px-6;
+  }
+
+  .contrast-btn {
+    @apply px-4 py-2 border border-charcoal-800 rounded-none hover:bg-charcoal-800 hover:text-cream-100 transition-colors duration-200 ease-in font-light tracking-wider text-xs uppercase;
+  }
+
+  .text-xsmall-regular {
+    @apply text-[10px] leading-4 font-normal;
+  }
+
+  .text-small-regular {
+    @apply text-xs leading-5 font-normal;
+  }
+
+  .text-small-semi {
+    @apply text-xs leading-5 font-semibold;
+  }
+
+  .text-base-regular {
+    @apply text-sm leading-6 font-normal;
+  }
+
+  .text-base-semi {
+    @apply text-sm leading-6 font-semibold;
+  }
+
+  .text-large-regular {
+    @apply text-base leading-6 font-normal;
+  }
+
+  .text-large-semi {
+    @apply text-base leading-6 font-semibold;
+  }
+
+  .text-xl-regular {
+    @apply text-2xl leading-[36px] font-normal;
+  }
+
+  .text-xl-semi {
+    @apply text-2xl leading-[36px] font-semibold;
+  }
+
+  .text-2xl-regular {
+    @apply text-[30px] leading-[48px] font-normal;
+  }
+
+  .text-2xl-semi {
+    @apply text-[30px] leading-[48px] font-semibold;
+  }
+
+  .text-3xl-regular {
+    @apply text-[32px] leading-[44px] font-normal;
+  }
+
+  .text-3xl-semi {
+    @apply text-[32px] leading-[44px] font-semibold;
+  }
+
+  .product-card {
+    @apply relative overflow-hidden bg-cream-100;
+  }
+
+  .product-card-image {
+    @apply w-full aspect-[3/4] object-cover transition-transform duration-700;
+  }
+
+  .product-card:hover .product-card-image {
+    @apply scale-105;
+  }
+
+  .gold-separator {
+    @apply flex items-center gap-4 my-8;
+  }
+
+  .gold-separator::before,
+  .gold-separator::after {
+    content: '';
+    @apply flex-1 h-px bg-gold-200;
+  }
+}
