@@ -130,15 +130,12 @@ export async function middleware(request: NextRequest) {
   const urlHasCountryCode =
     countryCode && request.nextUrl.pathname.split("/")[1].includes(countryCode)
 
-  if (urlHasCountryCode && cacheIdCookie) {
-    return NextResponse.next()
-  }
-
-  if (urlHasCountryCode && !cacheIdCookie) {
-    response.cookies.set("_medusa_cache_id", cacheId, {
-      maxAge: 60 * 60 * 24,
-    })
-    return response
+  if (urlHasCountryCode) {
+    const res = NextResponse.next()
+    if (!cacheIdCookie) {
+      res.cookies.set("_medusa_cache_id", cacheId, { maxAge: 60 * 60 * 24 })
+    }
+    return res
   }
 
   // No country code in URL — redirect to the correct region path
