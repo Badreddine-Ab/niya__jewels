@@ -141,6 +141,7 @@ export async function middleware(request: NextRequest) {
     return response
   }
 
+  // No country code in URL — redirect to the correct region path
   const redirectPath =
     request.nextUrl.pathname === "/" ? "" : request.nextUrl.pathname
   const queryString = request.nextUrl.search ? request.nextUrl.search : ""
