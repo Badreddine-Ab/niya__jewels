@@ -100,60 +100,54 @@ async function getCountryCode(
   }
 }
 
+const FALLBACK_REGION = DEFAULT_REGION || "ma"
+
 /**
  * Middleware to handle region selection and onboarding status.
  */
 export async function middleware(request: NextRequest) {
-  let redirectUrl = request.nextUrl.href
-
-  let response = NextResponse.redirect(redirectUrl, 307)
-
-  let cacheIdCookie = request.cookies.get("_medusa_cache_id")
-
-  let cacheId = cacheIdCookie?.value || crypto.randomUUID()
-
-  const regionMap = await getRegionMap(cacheId)
-
-  const countryCode = regionMap && (await getCountryCode(request, regionMap))
-
-  const urlHasCountryCode =
-    countryCode && request.nextUrl.pathname.split("/")[1].includes(countryCode)
-
-  // if one of the country codes is in the url and the cache id is set, return next
-  if (urlHasCountryCode && cacheIdCookie) {
-    return NextResponse.next()
-  }
-
-  // if one of the country codes is in the url and the cache id is not set, set the cache id and redirect
-  if (urlHasCountryCode && !cacheIdCookie) {
-    response.cookies.set("_medusa_cache_id", cacheId, {
-      maxAge: 60 * 60 * 24,
-    })
-
-    return response
-  }
-
-  // check if the url is a static asset
+  // Static assets pass through
   if (request.nextUrl.pathname.includes(".")) {
     return NextResponse.next()
   }
 
+  let redirectUrl = request.nextUrl.href
+  let response = NextResponse.redirect(redirectUrl, 307)
+
+  let cacheIdCookie = request.cookies.get("_medusa_cache_id")
+  let cacheId = cacheIdCookie?.value || crypto.randomUUID()
+
+  let regionMap: Map<string, HttpTypes.StoreRegion | number> = new Map()
+  try {
+    regionMap = await getRegionMap(cacheId)
+  } catch {
+    // Backend unavailable — fall back to default region
+    regionMap.set(FALLBACK_REGION, 1 as any)
+  }
+
+  const countryCode = regionMap && (await getCountryCode(request, regionMap)) || FALLBACK_REGION
+
+  const urlHasCountryCode =
+    countryCode && request.nextUrl.pathname.split("/")[1].includes(countryCode)
+
+  if (urlHasCountryCode && cacheIdCookie) {
+    return NextResponse.next()
+  }
+
+  if (urlHasCountryCode && !cacheIdCookie) {
+    response.cookies.set("_medusa_cache_id", cacheId, {
+      maxAge: 60 * 60 * 24,
+    })
+    return response
+  }
+
   const redirectPath =
     request.nextUrl.pathname === "/" ? "" : request.nextUrl.pathname
-
   const queryString = request.nextUrl.search ? request.nextUrl.search : ""
 
-  // If no country code is set, we redirect to the relevant region.
-  if (!urlHasCountryCode && countryCode) {
-    redirectUrl = `${request.nextUrl.origin}/${countryCode}${redirectPath}${queryString}`
-    response = NextResponse.redirect(`${redirectUrl}`, 307)
-  } else if (!urlHasCountryCode && !countryCode) {
-    // Handle case where no valid country code exists (empty regions)
-    return new NextResponse(
-      "No valid regions configured. Please set up regions with countries in your Medusa Admin.",
-      { status: 500 }
-    )
-  }
+  redirectUrl = `${request.nextUrl.origin}/${countryCode}${redirectPath}${queryString}`
+  response = NextResponse.redirect(`${redirectUrl}`, 307)
+  response.cookies.set("_medusa_cache_id", cacheId, { maxAge: 60 * 60 * 24 })
 
   return response
 }
