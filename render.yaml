@@ -1,0 +1,25 @@
+services:
+  - type: web
+    name: niya-jewels-backend
+    runtime: node
+    rootDir: backend
+    buildCommand: npm ci && npm run build
+    startCommand: npm run start
+    healthCheckPath: /health
+    plan: free
+    autoDeploy: true
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: DATABASE_URL
+        sync: false
+      - key: JWT_SECRET
+        generateValue: true
+      - key: COOKIE_SECRET
+        generateValue: true
+      - key: STORE_CORS
+        value: https://niya-jewels.vercel.app
+      - key: ADMIN_CORS
+        value: https://niya-jewels-backend.onrender.com
+      - key: AUTH_CORS
+        value: https://niya-jewels.vercel.app,https://niya-jewels-backend.onrender.com
