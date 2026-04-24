@@ -1,0 +1,50 @@
+# fly.toml app configuration file generated
+app = "niya-jewels-backend"
+primary_region = "cdg"
+
+[build]
+  builder = "heroku"
+  buildpacks = ["heroku/nodejs"]
+
+[env]
+  NODE_ENV = "production"
+  STORE_CORS = "https://niya-jewels.vercel.app,http://localhost:8000"
+  ADMIN_CORS = "https://niya-jewels.vercel.app,http://localhost:9000"
+  AUTH_CORS = "https://niya-jewels.vercel.app,http://localhost:8000,http://localhost:9000"
+
+[http_service]
+  internal_port = 9000
+  force_https = true
+  auto_stop_machines = true
+  auto_start_machines = true
+  min_machines_running = 0
+  processes = ["app"]
+
+[[services]]
+  protocol = "tcp"
+  internal_port = 9000
+  processes = ["app"]
+  [services.concurrency]
+    type = "requests"
+    hard_limit = 1000
+    soft_limit = 100
+  [[services.ports]]
+    port = 80
+    handlers = ["http"]
+  [[services.ports]]
+    port = 443
+    handlers = ["http", "tls"]
+
+[checks]
+  [checks.alive]
+    type = "http"
+    interval = "10s"
+    timeout = "5s"
+    grace_period = "30s"
+    method = "GET"
+    path = "/health"
+
+[[vm]]
+  cpu_kind = "shared"
+  cpus = 1
+  memory_mb = 1024
