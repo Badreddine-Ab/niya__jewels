@@ -42,7 +42,7 @@ export default async function Nav() {
             >
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img
-                src="/niya-logo.svg"
+                src="/niya-logo.jpg"
                 alt="NIYA Jewels"
                 className="h-11 w-auto"
               />

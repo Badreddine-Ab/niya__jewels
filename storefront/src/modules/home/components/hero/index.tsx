@@ -79,7 +79,7 @@ const Hero = () => {
         <div className="opacity-0 animate-[fade-in-top_0.9s_ease_0.25s_forwards] mb-10">
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img
-            src="/niya-logo.svg"
+            src="/niya-logo.jpg"
             alt="NIYA Jewels"
             className="w-52 md:w-72 mx-auto"
           />

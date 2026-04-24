@@ -38,6 +38,8 @@ export default function ProductActions({
 
   const [options, setOptions] = useState<Record<string, string | undefined>>({})
   const [isAdding, setIsAdding] = useState(false)
+  const [isGift, setIsGift] = useState(false)
+  const [giftMessage, setGiftMessage] = useState("")
   const countryCode = useParams().countryCode as string
 
   // If there is only 1 variant, preselect the options
@@ -126,10 +128,18 @@ export default function ProductActions({
 
     setIsAdding(true)
 
+    const metadata = isGift
+      ? {
+          is_gift: true,
+          gift_message: giftMessage,
+        }
+      : undefined
+
     await addToCart({
       variantId: selectedVariant.id,
       quantity: 1,
       countryCode,
+      metadata,
     })
 
     setIsAdding(false)
@@ -161,6 +171,31 @@ export default function ProductActions({
         </div>
 
         <ProductPrice product={product} variant={selectedVariant} />
+
+        {/* Gift option */}
+        <div className="flex flex-col gap-y-3 py-4 border-t border-gold-100">
+          <label className="flex items-center gap-3 cursor-pointer">
+            <input
+              type="checkbox"
+              checked={isGift}
+              onChange={(e) => setIsGift(e.target.checked)}
+              disabled={isAdding}
+              className="w-4 h-4 cursor-pointer"
+            />
+            <span className="text-xs text-charcoal-600">C'est un cadeau?</span>
+          </label>
+
+          {isGift && (
+            <textarea
+              placeholder="Message à écrire dans la boîte..."
+              value={giftMessage}
+              onChange={(e) => setGiftMessage(e.target.value)}
+              disabled={isAdding}
+              className="w-full px-3 py-2 text-xs border border-gold-200 rounded bg-cream-50 text-charcoal-700 placeholder-charcoal-300 focus:outline-none focus:border-gold-400 focus:ring-1 focus:ring-gold-300 disabled:opacity-50 disabled:cursor-not-allowed"
+              rows={3}
+            />
+          )}
+        </div>
 
         <button
           onClick={handleAddToCart}

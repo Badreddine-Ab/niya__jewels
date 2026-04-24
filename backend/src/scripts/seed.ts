@@ -91,19 +91,27 @@ export default async function seedDemoData({ container }: ExecArgs) {
   });
 
   logger.info("Seeding region data...");
-  const { result: regionResult } = await createRegionsWorkflow(container).run({
-    input: {
-      regions: [
-        {
-          name: "France & Maghreb",
-          currency_code: "eur",
-          countries,
-          payment_providers: ["pp_system_default"],
-        },
-      ],
-    },
+  let region = await container.resolve(Modules.REGION).listRegions({
+    name: "France & Maghreb",
   });
-  const region = regionResult[0];
+
+  if (!region.length) {
+    const { result: regionResult } = await createRegionsWorkflow(container).run({
+      input: {
+        regions: [
+          {
+            name: "France & Maghreb",
+            currency_code: "eur",
+            countries,
+            payment_providers: ["pp_system_default"],
+          },
+        ],
+      },
+    });
+    region = regionResult;
+  }
+
+  const regionData = region[0];
   logger.info("Finished seeding regions.");
 
   logger.info("Seeding tax regions...");
@@ -196,7 +204,7 @@ export default async function seedDemoData({ container }: ExecArgs) {
         prices: [
           { currency_code: "eur", amount: 8 },
           { currency_code: "usd", amount: 9 },
-          { region_id: region.id, amount: 8 },
+          { region_id: regionData.id, amount: 8 },
         ],
         rules: [
           { attribute: "enabled_in_store", value: "true", operator: "eq" },
@@ -217,7 +225,7 @@ export default async function seedDemoData({ container }: ExecArgs) {
         prices: [
           { currency_code: "eur", amount: 15 },
           { currency_code: "usd", amount: 17 },
-          { region_id: region.id, amount: 15 },
+          { region_id: regionData.id, amount: 15 },
         ],
         rules: [
           { attribute: "enabled_in_store", value: "true", operator: "eq" },
