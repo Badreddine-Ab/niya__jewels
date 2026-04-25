@@ -3,8 +3,7 @@ app = "niya-jewels-backend"
 primary_region = "cdg"
 
 [build]
-  builder = "heroku"
-  buildpacks = ["heroku/nodejs"]
+  dockerfile = "Dockerfile"
 
 [env]
   NODE_ENV = "production"
