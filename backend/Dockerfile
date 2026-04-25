@@ -12,4 +12,4 @@ RUN npm run build
 
 EXPOSE 9000
 
-CMD ["npm", "run", "start"]
+CMD ["node_modules/.bin/medusa", "start", "--host", "0.0.0.0", "--port", "9000"]
