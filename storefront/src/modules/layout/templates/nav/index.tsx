@@ -18,10 +18,10 @@ export default async function Nav() {
   return (
     <div className="sticky top-0 inset-x-0 z-50">
       {/* Announcement bar */}
-      <div className="bg-charcoal-800 text-cream-100 text-center py-2.5 px-4">
+      <div className="bg-rose-500 text-white text-center py-2.5 px-4">
         <p className="text-[9px] tracking-[0.4em] uppercase font-light">
           ✦ &nbsp;Livraison offerte dès 5000 DA &nbsp;·&nbsp; Code{" "}
-          <span className="text-gold-400">NIYA10</span> pour -10% sur votre première commande&nbsp; ✦
+          <span className="text-yellow-200">NIYA10</span> pour -10% sur votre première commande&nbsp; ✦
         </p>
       </div>
 
@@ -42,9 +42,9 @@ export default async function Nav() {
             >
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img
-                src="/niya-logo.jpg"
+                src="/niya-logo.svg"
                 alt="NIYA Jewels"
-                className="h-11 w-auto"
+                className="h-12 w-auto"
               />
             </LocalizedClientLink>
           </div>
@@ -53,13 +53,19 @@ export default async function Nav() {
           <div className="flex items-center gap-x-6 h-full flex-1 basis-0 justify-end">
             <div className="hidden small:flex items-center gap-x-7 h-full">
               <LocalizedClientLink
-                className="text-charcoal-600 hover:text-gold-500 transition-colors duration-200 text-[10px] tracking-[0.25em] uppercase font-light gold-underline"
+                className="text-charcoal-600 hover:text-rose-500 transition-colors duration-200 text-[10px] tracking-[0.25em] uppercase font-light gold-underline"
                 href="/store"
               >
                 Boutique
               </LocalizedClientLink>
               <LocalizedClientLink
-                className="text-charcoal-600 hover:text-gold-500 transition-colors duration-200 text-[10px] tracking-[0.25em] uppercase font-light gold-underline"
+                className="text-charcoal-600 hover:text-rose-500 transition-colors duration-200 text-[10px] tracking-[0.25em] uppercase font-light gold-underline"
+                href="/notre-histoire"
+              >
+                Notre Histoire
+              </LocalizedClientLink>
+              <LocalizedClientLink
+                className="text-charcoal-600 hover:text-rose-500 transition-colors duration-200 text-[10px] tracking-[0.25em] uppercase font-light gold-underline"
                 href="/account"
                 data-testid="nav-account-link"
               >

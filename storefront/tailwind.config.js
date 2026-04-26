@@ -66,6 +66,30 @@ module.exports = {
           800: "#1A1A1A",
           900: "#0D0D0D",
         },
+        rose: {
+          50: "#FDF2F4",
+          100: "#FAE3E8",
+          200: "#F5C6D0",
+          300: "#EDA0B0",
+          400: "#E07A90",
+          500: "#C85572",
+          600: "#A83D5A",
+          700: "#8A2F47",
+          800: "#6E2338",
+          900: "#501828",
+        },
+        blush: {
+          50: "#FFF5F7",
+          100: "#FFE8ED",
+          200: "#FFCCD6",
+          300: "#FFA3B5",
+          400: "#FF7A96",
+          500: "#F55275",
+          600: "#D93660",
+          700: "#B5264D",
+          800: "#8F1A3A",
+          900: "#6B1229",
+        },
       },
       borderRadius: {
         none: "0px",
@@ -107,6 +131,11 @@ module.exports = {
         display: [
           "Cormorant Garamond",
           "serif",
+        ],
+        script: [
+          "Great Vibes",
+          "Dancing Script",
+          "cursive",
         ],
       },
       letterSpacing: {

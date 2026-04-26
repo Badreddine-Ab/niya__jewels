@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500&family=Jost:wght@300;400;500;600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500&family=Great+Vibes&family=Jost:wght@300;400;500;600&display=swap');
 
 @import "tailwindcss/base";
 @import "tailwindcss/components";
@@ -8,8 +8,11 @@
   --color-gold: #C9A96E;
   --color-gold-light: #E8D5A3;
   --color-gold-dark: #9A7A3C;
-  --color-cream: #FAF7F2;
+  --color-cream: #FAF7F0;
   --color-charcoal: #1A1A1A;
+  --color-rose: #C85572;
+  --color-rose-light: #F5D0DA;
+  --color-blush: #FDF0F3;
 }
 
 html {
@@ -23,28 +26,26 @@ body {
   font-weight: 300;
 }
 
+/* Grain overlay on the entire site */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 9999;
+  opacity: 0.018;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+  background-size: 180px 180px;
+}
+
 @layer utilities {
-  .no-scrollbar::-webkit-scrollbar {
-    display: none;
-  }
-
-  .no-scrollbar::-webkit-scrollbar-track {
-    background-color: transparent;
-  }
-
-  .no-scrollbar {
-    -ms-overflow-style: none;
-    scrollbar-width: none;
-  }
+  .no-scrollbar::-webkit-scrollbar { display: none; }
+  .no-scrollbar::-webkit-scrollbar-track { background-color: transparent; }
+  .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
 
   input:focus ~ label,
-  input:not(:placeholder-shown) ~ label {
-    @apply -translate-y-2 text-xsmall-regular;
-  }
-
-  input:focus ~ label {
-    @apply left-0;
-  }
+  input:not(:placeholder-shown) ~ label { @apply -translate-y-2 text-xsmall-regular; }
+  input:focus ~ label { @apply left-0; }
 
   input:-webkit-autofill,
   input:-webkit-autofill:hover,
@@ -57,37 +58,24 @@ body {
   select:-webkit-autofill:focus {
     border: 1px solid #C9A96E;
     -webkit-text-fill-color: #1A1A1A;
-    -webkit-box-shadow: 0 0 0px 1000px #FAF7F2 inset;
+    -webkit-box-shadow: 0 0 0px 1000px #FAF7F0 inset;
     transition: background-color 5000s ease-in-out 0s;
   }
 
   input[type="search"]::-webkit-search-decoration,
   input[type="search"]::-webkit-search-cancel-button,
   input[type="search"]::-webkit-search-results-button,
-  input[type="search"]::-webkit-search-results-decoration {
-    -webkit-appearance: none;
-  }
+  input[type="search"]::-webkit-search-results-decoration { -webkit-appearance: none; }
 
-  .font-display {
-    font-family: 'Cormorant Garamond', serif;
-  }
+  .font-display { font-family: 'Cormorant Garamond', serif; }
+  .font-script { font-family: 'Great Vibes', cursive; }
 
-  .text-gold {
-    color: var(--color-gold);
-  }
+  .text-gold { color: var(--color-gold); }
+  .bg-cream { background-color: var(--color-cream); }
+  .border-gold { border-color: var(--color-gold); }
 
-  .bg-cream {
-    background-color: var(--color-cream);
-  }
-
-  .border-gold {
-    border-color: var(--color-gold);
-  }
-
-  .gold-underline {
-    position: relative;
-  }
-
+  /* Animated underline */
+  .gold-underline { position: relative; }
   .gold-underline::after {
     content: '';
     position: absolute;
@@ -98,32 +86,33 @@ body {
     background-color: var(--color-gold);
     transition: width 0.3s ease;
   }
+  .gold-underline:hover::after { width: 100%; }
 
-  .gold-underline:hover::after {
-    width: 100%;
+  .rose-underline { position: relative; }
+  .rose-underline::after {
+    content: '';
+    position: absolute;
+    bottom: -2px;
+    left: 0;
+    width: 0;
+    height: 1px;
+    background-color: var(--color-rose);
+    transition: width 0.3s ease;
   }
+  .rose-underline:hover::after { width: 100%; }
 
+  /* Buttons */
   .luxury-btn {
     @apply px-8 py-3 border border-charcoal-800 text-charcoal-800 font-sans font-light tracking-widest text-xs uppercase transition-all duration-300;
   }
+  .luxury-btn:hover { @apply bg-charcoal-800 text-cream-100; }
 
-  .luxury-btn:hover {
-    @apply bg-charcoal-800 text-cream-100;
+  .luxury-btn-rose {
+    @apply px-8 py-3 border border-rose-400 text-rose-600 font-sans font-light tracking-widest text-xs uppercase transition-all duration-300;
   }
+  .luxury-btn-rose:hover { @apply bg-rose-500 text-white border-rose-500; }
 
-  .luxury-btn-gold {
-    @apply px-8 py-3 border border-gold-500 text-gold-600 font-sans font-light tracking-widest text-xs uppercase transition-all duration-300;
-  }
-
-  .luxury-btn-gold:hover {
-    @apply bg-gold-500 text-cream-100;
-  }
-
-  .section-divider {
-    @apply w-12 h-px bg-gold-400 mx-auto my-6;
-  }
-
-  /* Moroccan geometric texture overlay */
+  /* Moroccan texture */
   .moroccan-texture {
     background-image:
       repeating-linear-gradient(45deg, rgba(201,169,110,0.03) 0px, rgba(201,169,110,0.03) 1px, transparent 1px, transparent 50%),
@@ -131,18 +120,7 @@ body {
     background-size: 40px 40px;
   }
 
-  /* Entrance animation helpers */
-  .reveal {
-    opacity: 0;
-    transform: translateY(20px);
-    transition: opacity 0.8s ease, transform 0.8s ease;
-  }
-  .reveal.visible {
-    opacity: 1;
-    transform: translateY(0);
-  }
-
-  /* Gold shimmer text */
+  /* Gold shimmer */
   .gold-shimmer {
     background: linear-gradient(90deg, #C9A96E 0%, #E8D5A3 40%, #C9A96E 60%, #9A7A3C 100%);
     background-size: 200% auto;
@@ -152,105 +130,80 @@ body {
     animation: shimmer 4s linear infinite;
   }
 
-  /* Product card hover */
-  .jewelry-card {
-    @apply relative overflow-hidden bg-cream-200;
-  }
-  .jewelry-card img {
-    @apply w-full h-full object-cover transition-transform duration-700 ease-out;
-  }
-  .jewelry-card:hover img {
-    transform: scale(1.07);
-  }
+  /* Product card */
+  .jewelry-card { @apply relative overflow-hidden bg-cream-200; }
+  .jewelry-card img { @apply w-full h-full object-cover transition-transform duration-700 ease-out; }
+  .jewelry-card:hover img { transform: scale(1.06); }
   .jewelry-card-overlay {
     @apply absolute inset-0 flex items-end justify-center opacity-0 transition-opacity duration-500;
-    background: linear-gradient(to top, rgba(26,26,26,0.6) 0%, transparent 60%);
+    background: linear-gradient(to top, rgba(26,26,26,0.55) 0%, transparent 55%);
   }
-  .jewelry-card:hover .jewelry-card-overlay {
-    @apply opacity-100;
+  .jewelry-card:hover .jewelry-card-overlay { @apply opacity-100; }
+
+  /* Editorial fade-in */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(28px); }
+    to { opacity: 1; transform: translateY(0); }
   }
+  @keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
+  .animate-fade-up { animation: fadeUp 0.8s ease forwards; }
+  .animate-fade-in { animation: fadeIn 0.6s ease forwards; }
 }
 
 @layer components {
-  .content-container {
-    @apply max-w-[1440px] w-full mx-auto px-6;
-  }
+  .content-container { @apply max-w-[1440px] w-full mx-auto px-6; }
 
   .contrast-btn {
     @apply px-4 py-2 border border-charcoal-800 rounded-none hover:bg-charcoal-800 hover:text-cream-100 transition-colors duration-200 ease-in font-light tracking-wider text-xs uppercase;
   }
 
-  .text-xsmall-regular {
-    @apply text-[10px] leading-4 font-normal;
+  .text-xsmall-regular { @apply text-[10px] leading-4 font-normal; }
+  .text-small-regular { @apply text-xs leading-5 font-normal; }
+  .text-small-semi { @apply text-xs leading-5 font-semibold; }
+  .text-base-regular { @apply text-sm leading-6 font-normal; }
+  .text-base-semi { @apply text-sm leading-6 font-semibold; }
+  .text-large-regular { @apply text-base leading-6 font-normal; }
+  .text-large-semi { @apply text-base leading-6 font-semibold; }
+  .text-xl-regular { @apply text-2xl leading-[36px] font-normal; }
+  .text-xl-semi { @apply text-2xl leading-[36px] font-semibold; }
+  .text-2xl-regular { @apply text-[30px] leading-[48px] font-normal; }
+  .text-2xl-semi { @apply text-[30px] leading-[48px] font-semibold; }
+  .text-3xl-regular { @apply text-[32px] leading-[44px] font-normal; }
+  .text-3xl-semi { @apply text-[32px] leading-[44px] font-semibold; }
+
+  .product-card { @apply relative overflow-hidden bg-cream-100; }
+  .product-card-image { @apply w-full aspect-[3/4] object-cover transition-transform duration-700; }
+  .product-card:hover .product-card-image { @apply scale-105; }
+
+  .gold-separator { @apply flex items-center gap-4 my-8; }
+  .gold-separator::before, .gold-separator::after { content: ''; @apply flex-1 h-px bg-gold-200; }
+
+  /* Section label */
+  .section-label {
+    @apply text-[9px] tracking-[0.5em] uppercase font-light;
+    color: var(--color-rose);
   }
 
-  .text-small-regular {
-    @apply text-xs leading-5 font-normal;
+  /* Eyebrow tag */
+  .eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 9px;
+    letter-spacing: 0.45em;
+    text-transform: uppercase;
+    font-weight: 300;
+    color: var(--color-rose);
   }
-
-  .text-small-semi {
-    @apply text-xs leading-5 font-semibold;
-  }
-
-  .text-base-regular {
-    @apply text-sm leading-6 font-normal;
-  }
-
-  .text-base-semi {
-    @apply text-sm leading-6 font-semibold;
-  }
-
-  .text-large-regular {
-    @apply text-base leading-6 font-normal;
-  }
-
-  .text-large-semi {
-    @apply text-base leading-6 font-semibold;
-  }
-
-  .text-xl-regular {
-    @apply text-2xl leading-[36px] font-normal;
-  }
-
-  .text-xl-semi {
-    @apply text-2xl leading-[36px] font-semibold;
-  }
-
-  .text-2xl-regular {
-    @apply text-[30px] leading-[48px] font-normal;
-  }
-
-  .text-2xl-semi {
-    @apply text-[30px] leading-[48px] font-semibold;
-  }
-
-  .text-3xl-regular {
-    @apply text-[32px] leading-[44px] font-normal;
-  }
-
-  .text-3xl-semi {
-    @apply text-[32px] leading-[44px] font-semibold;
-  }
-
-  .product-card {
-    @apply relative overflow-hidden bg-cream-100;
-  }
-
-  .product-card-image {
-    @apply w-full aspect-[3/4] object-cover transition-transform duration-700;
-  }
-
-  .product-card:hover .product-card-image {
-    @apply scale-105;
-  }
-
-  .gold-separator {
-    @apply flex items-center gap-4 my-8;
-  }
-
-  .gold-separator::before,
-  .gold-separator::after {
+  .eyebrow::before, .eyebrow::after {
     content: '';
-    @apply flex-1 h-px bg-gold-200;
+    display: block;
+    width: 20px;
+    height: 1px;
+    background: var(--color-rose);
+    opacity: 0.5;
   }
 }

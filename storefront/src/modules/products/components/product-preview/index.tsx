@@ -41,17 +41,22 @@ export default async function ProductPreview({
         </div>
 
         {/* Product info */}
-        <div className="flex flex-col gap-1.5 px-1">
+        <div className="flex flex-col gap-1 px-1">
           <h3
-            className="text-charcoal-700 group-hover:text-gold-600 transition-colors duration-200 font-light leading-snug"
-            style={{ fontSize: "0.85rem", letterSpacing: "0.03em" }}
+            className="text-charcoal-700 group-hover:text-rose-500 transition-colors duration-200 leading-snug"
+            style={{ fontFamily: "'Great Vibes', cursive", fontSize: "1.5rem", lineHeight: 1.2 }}
             data-testid="product-title"
           >
             {product.title}
           </h3>
-          <div className="flex items-center gap-x-2">
+          {product.subtitle && (
+            <p className="text-charcoal-400 font-light" style={{ fontSize: "0.72rem", letterSpacing: "0.05em" }}>
+              {product.subtitle}
+            </p>
+          )}
+          <div className="flex items-center gap-x-2 mt-0.5">
             {cheapestPrice && (
-              <span className="text-gold-600 text-sm font-light tracking-wider">
+              <span className="text-rose-500 text-sm font-light tracking-wider">
                 <PreviewPrice price={cheapestPrice} />
               </span>
             )}
